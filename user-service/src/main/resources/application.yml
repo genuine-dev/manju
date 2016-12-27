@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: user-service
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:user;MODE=MYSQL;INIT=CREATE SCHEMA IF NOT EXISTS "public";
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: false
+    show-sql: true
+flyway:
+  enabled: true
+  locations: classpath:database/migration
+server:
+  port: 8180
+security:
+  oauth2:
+    resource:
+      user-info-uri: https://www.googleapis.com/oauth2/v1/userinfo
+    client:
+      access-token-uri: https://accounts.google.com/o/oauth2/token
+      user-authorization-uri: https://accounts.google.com/o/oauth2/auth
+      client-id: ${clientId}
+      client-secret: ${clientSecret}
+      grant-type: code
+      scope:
+        - email
+        - profile
+      auto-approve-scopes: email, profile
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

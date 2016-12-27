@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: article-service
+  data:
+    jest:
+      uri: http://192.168.99.100:9200
+server:
+  port: 8280
+security:
+  oauth2:
+    resource:
+      user-info-uri: https://www.googleapis.com/oauth2/v1/userinfo
+    client:
+      access-token-uri: https://accounts.google.com/o/oauth2/token
+      user-authorization-uri: https://accounts.google.com/o/oauth2/auth
+      client-id: ${clientId}
+      client-secret: ${clientSecret}
+      grant-type: code
+      scope:
+        - email
+        - profile
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
